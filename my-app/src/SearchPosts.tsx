@@ -1,3 +1,12 @@
+/*
+ * FILE:				  SearchPosts.tsx
+ * PROJECT:			Front end assignment
+ * PROGRAMMER:		Tino Restivo
+ * FIRST VERSION:	Feb 22, 2026
+ * DESCRIPTION:
+ * Called when searching posts.
+ */
+
 import "./App.css";
 import type { UserDataInterface } from "./UserDataInterface.tsx";
 import { useState, useEffect } from "react";
@@ -6,7 +15,7 @@ import PostRender from "./PostRender.tsx";
 
 // Address of our backend API
 const API_URL = " https://awf-api.lvl99.dev";
-
+//Contains bool for change view and interface for user data such as name
 interface SearchPostsProp {
   ChangeView: (view: boolean) => void;
   UserData: UserDataInterface;
@@ -30,6 +39,7 @@ const SearchPosts: React.FC<SearchPostsProp> = ({ ChangeView, UserData }) => {
     }
   }, [UserData]);
 
+  //followed this link for selecting from drop down
   //https://www.w3schools.com/react/react_forms_select.asp
   //https://stackoverflow.com/questions/33256274/typesafe-select-onchange-event-using-reactjs-and-typescript
   const [SelectedForum, setSelectedForum] = useState(" ");
@@ -44,12 +54,11 @@ const SearchPosts: React.FC<SearchPostsProp> = ({ ChangeView, UserData }) => {
     }
   }, [SelectedForum]);
 
-  //const [likePost, setLike] = useState(false);
-
+  //Change view button click event
   const changeViewButtonClicked = () => {
     ChangeView(true);
   };
-
+  //Get the posts for the forum
   const fetchForumPosts = async () => {
     try {
       const response = await fetch(
@@ -79,7 +88,7 @@ const SearchPosts: React.FC<SearchPostsProp> = ({ ChangeView, UserData }) => {
       setError(err instanceof Error ? err.message : "An error occurred");
     }
   };
-
+  //Taken from week 4 demo and modified
   /**
    * This function makes a request to the backend to GET the list of forums.
    *
@@ -129,7 +138,7 @@ const SearchPosts: React.FC<SearchPostsProp> = ({ ChangeView, UserData }) => {
           value={SelectedForum}
           onChange={handleChange}
         >
-          {/*https://www.w3schools.com/react/react_lists.asp*/}
+          {/*code for the drop down select from https://www.w3schools.com/react/react_lists.asp*/}
           {forums.map((forum, index) => (
             <option key={index} value={forum}>
               {forum}

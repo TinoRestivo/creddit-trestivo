@@ -1,3 +1,12 @@
+/*
+ * FILE:				  FavPosts.tsx
+ * PROJECT:			Front end assignment
+ * PROGRAMMER:		Tino Restivo
+ * FIRST VERSION:	Feb 22, 2026
+ * DESCRIPTION:
+ * This code runs when looking at fav posts.
+ */
+
 import "./App.css";
 import { useState, useEffect } from "react";
 import type { UserDataInterface } from "./UserDataInterface.tsx";
@@ -6,7 +15,7 @@ import PostRender from "./PostRender.tsx";
 
 // Address of our backend API
 const API_URL = " https://awf-api.lvl99.dev";
-
+//Contains bool for change view and interface for user data such as name
 interface FavPostsProp {
   ChangeView: (view: boolean) => void;
   UserData: UserDataInterface;
@@ -18,6 +27,7 @@ const FavPosts: React.FC<FavPostsProp> = ({ ChangeView, UserData }) => {
   }
   const favPostIds: favPostProps = { ids: [] };
 
+  //error state
   const [error, setError] = useState<string | null>(null);
   // When the view is called get the liked posts from webstorage api and then fetch them.
   useEffect(() => {
@@ -25,7 +35,7 @@ const FavPosts: React.FC<FavPostsProp> = ({ ChangeView, UserData }) => {
     fetchForumPosts();
   }, []);
 
-  //start with empty list of posts in the forum
+  //post state start with empty list of posts in the forum
   const [posts, setPosts] = useState<PostInterface[]>([]);
 
   const changeViewButtonClicked = () => {
@@ -42,7 +52,7 @@ const FavPosts: React.FC<FavPostsProp> = ({ ChangeView, UserData }) => {
       }
     }
   }
-
+  //Get the liked posts by sending a post with all the liked ids
   const fetchForumPosts = async () => {
     try {
       const response = await fetch(`${API_URL}/posts`, {

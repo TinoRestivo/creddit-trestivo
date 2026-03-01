@@ -1,3 +1,12 @@
+/*
+ * FILE:				  App.tsx
+ * PROJECT:			Front end assignment
+ * PROGRAMMER:		Tino Restivo
+ * FIRST VERSION:	Feb 22, 2026
+ * DESCRIPTION:
+ * This page is the start.
+ */
+
 import "./App.css";
 
 import { useState, useEffect } from "react";
